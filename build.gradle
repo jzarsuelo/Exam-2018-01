@@ -17,7 +17,8 @@ buildscript {
 
                 // libraries
                 'retrofit2' : '2.4.0',
-                'okhttp' : '3.10.0'
+                'okhttp' : '3.10.0',
+                'glide' : '4.7.1'
         ]
 
         api = [

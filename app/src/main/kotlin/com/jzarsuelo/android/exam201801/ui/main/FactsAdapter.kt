@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.jzarsuelo.android.exam201801.R
 import com.jzarsuelo.android.exam201801.data.Fact
+import com.jzarsuelo.android.exam201801.utils.ExamGlideApp
 
 class FactsAdapter : RecyclerView.Adapter<FactsAdapter.ViewHolder>() {
 
@@ -24,8 +27,21 @@ class FactsAdapter : RecyclerView.Adapter<FactsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fact = data[position]
+
         holder.titleTextView?.text = fact.title
         holder.descriptionTextView?.text = fact.description
+
+        holder.imageView?.apply {
+
+            val requestOptions = RequestOptions()
+                    .placeholder(R.drawable.ic_image_placeholder)
+
+            Glide.with(this)
+                    .load(fact.imageHref)
+                    .apply(requestOptions)
+                    .into(this)
+        }
+
     }
 
     fun addData(data: List<Fact>) {
