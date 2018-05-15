@@ -46,6 +46,7 @@ dependencies {
     // android
     implementation "com.android.support:appcompat-v7:$versions.appcompat"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+    implementation "com.android.support:recyclerview-v7:$versions.androidSupport"
 
     // libraries
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit2"

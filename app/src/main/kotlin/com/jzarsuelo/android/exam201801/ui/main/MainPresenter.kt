@@ -9,6 +9,7 @@ class MainPresenter(
 ) : MainContract.Presenter {
 
     override fun requestData() {
+        view.showProgressBar(true)
 
         repository.getData(object : FactDataSource.FactCallback{
             override fun onSuccess(data: FactResponse) {

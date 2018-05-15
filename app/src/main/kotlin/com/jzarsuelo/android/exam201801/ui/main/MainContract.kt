@@ -10,6 +10,7 @@ interface MainContract {
         fun showData(data: FactResponse)
         fun showErrorNoInternet()
         fun showErrorNoData()
+        fun showProgressBar(isVisible: Boolean)
     }
 
     interface Presenter : BasePresenter {

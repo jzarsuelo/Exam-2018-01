@@ -12,6 +12,7 @@ buildscript {
 
                 // android
                 'appcompat' : '27.1.1',
+                'androidSupport' : '27.1.1',
                 'constraintLayout' : '1.1.0',
 
                 // libraries
