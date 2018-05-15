@@ -2,6 +2,8 @@ package com.jzarsuelo.android.exam201801.ui.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
@@ -12,14 +14,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
+    private val adapter = FactsAdapter()
+
     override var presenter: MainContract.Presenter = MainPresenter(this, Injection.provideFactRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
-        setTitle(getString(R.string.app_name))
+        setUpViews()
 
         presenter.requestData()
     }
@@ -32,6 +35,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun showData(data: FactResponse) {
         showProgressBar(false)
         setTitle(data.title)
+
+        recyclerView.visibility = View.VISIBLE
+        adapter.addData(data.rows)
     }
 
     override fun showErrorNoInternet() {
@@ -45,6 +51,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun showErrorNoData() {
         showProgressBar(false)
         noDataTextView.visibility = View.VISIBLE
+    }
+
+    private fun setUpViews() {
+        setSupportActionBar(toolbar)
+        setTitle(getString(R.string.app_name))
+
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(applicationContext)
+            setHasFixedSize(false)
+            adapter = this@MainActivity.adapter
+            addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+        }
     }
 
     private fun setTitle(title: String) {
