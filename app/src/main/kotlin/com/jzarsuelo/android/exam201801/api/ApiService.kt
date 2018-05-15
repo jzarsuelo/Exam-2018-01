@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 /**
@@ -31,6 +32,7 @@ interface ApiService {
             val okHttpClient = builder.build()
             val retrofit = Retrofit.Builder()
                     .baseUrl( BuildConfig.API_BASE_URI )
+                    .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient)
                     .build()
 
