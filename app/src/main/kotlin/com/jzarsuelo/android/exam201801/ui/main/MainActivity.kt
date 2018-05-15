@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.jzarsuelo.android.exam201801.R
@@ -24,11 +26,29 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         setUpViews()
 
-        presenter.requestData()
+        refreshData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_refresh -> {
+                refreshData()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun showProgressBar(isVisible: Boolean) {
-        progressBar.visibility = if (isVisible) View.VISIBLE
+        progressBar.visibility = if (isVisible) {
+            noDataTextView.visibility = View.GONE
+            View.VISIBLE
+        }
         else View.GONE
     }
 
@@ -50,7 +70,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun showErrorNoData() {
         showProgressBar(false)
-        noDataTextView.visibility = View.VISIBLE
+        noDataTextView.visibility =  View.VISIBLE
     }
 
     private fun setUpViews() {
@@ -68,5 +88,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private fun setTitle(title: String) {
         supportActionBar?.title = if (TextUtils.isEmpty(title)) getString(R.string.app_name)
         else title
+    }
+
+    private fun refreshData() {
+        recyclerView.visibility = View.GONE
+        presenter.requestData()
     }
 }
