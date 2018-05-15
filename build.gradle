@@ -12,7 +12,15 @@ buildscript {
 
                 // android
                 'appcompat' : '27.1.1',
-                'constraintLayout' : '1.1.0'
+                'constraintLayout' : '1.1.0',
+
+                // libraries
+                'retrofit2' : '2.4.0',
+                'okhttp' : '3.10.0'
+        ]
+
+        api = [
+                'baseUri' : '"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/"'
         ]
     }
 
