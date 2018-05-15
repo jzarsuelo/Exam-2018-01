@@ -24,6 +24,5 @@ $ git clone https://github.com/jzarsuelo/Exam-2018-01
 
 ## Built With
 
-* Android Room
 * [Retrofit](https://github.com/square/retrofit) - HTTP client
 * [Glide](https://github.com/bumptech/glide) - Image loading and caching for Android
